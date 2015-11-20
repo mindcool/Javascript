@@ -61,14 +61,36 @@
 			this.language = lang;
 			this.validate();
 			return this;
+		},
+		HTMLGreeting: function(selector, formal){
+			if(!$) {
+				throw 'jQuery not loaded';
+			}
+			if (!selector) {
+				throw "Missing jQuery Selector";
+			}
+
+			var msg;
+			if(formal) {
+				msg = this.formalGreetings();
+			}
+			else {
+				msg = this.greeting();
+			}
+
+			$(selector).html(msg);
+
+			return this;
 		}
-	};
+		};
 
 	Greeter.init = function(firstname, lastname, language){
 		var self = this;
 		self.firstname = firstname || "Noyan";
 		self.lastname = lastname || "AYDIN";
 		self.language = language || "en";
+
+		self.validate();
 	}
 
 	Greeter.init.prototype = Greeter.prototype;
